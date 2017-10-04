@@ -95,7 +95,7 @@ setTimeout (function() {
 ``` 
 将整个函数做成参数传递给setTimeout，形成回调。<br/>
 
-## 4.块作用域
+## 4 块作用域
 ``` javascript
 for(var i = 0; i < 5; i++) {
 	console.log("guo")
@@ -110,4 +110,26 @@ for(let i = 0; i < 5; i++) {
 }
 console.log(i)
 ```
-这里访问i，系统会报错。
+这里访问i，系统会报错。<br/>
+## 5 提升
+``` javascript
+a = 2 
+var a 
+console.log(a) // 输出什么呢？ 报错吗？或者是undefined？
+```
+然而这段代码既没有报错，也没有出现undefined。而是输出了一个2,有人可能会想这是为什么？其实也就是跟我们之前讲的编译器有关系了。上述代码实际处理过程会
+变成下边这样：
+``` javascript
+var a 
+a = 2
+console.log(a)
+```
+编译器会将变量的声明提到赋值的前边，因而最后不会报错。在js中，函数也会出现这种情况，我称为它为“特性”。
+``` javascript
+foo()
+function foo() {
+console.log(a) // undefined
+var a = 2 
+}
+``` 
+由于函数声明会被提升，因为函数是可以执行的，由于函数内部的代码也是出现了变量提升，因而最后输出undefined.
